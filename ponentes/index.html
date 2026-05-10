@@ -4,519 +4,633 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FoF Córdoba — Invitación a panelistas</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #1e1e1e; color: #fff; font-family: "Inter", sans-serif; }
 
-    body {
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #1e1e1e;
-      color: #fff;
-    }
+    /* ── Slider ── */
+    .deck { display: flex; width: 100%; height: 100vh; will-change: transform; transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
 
-    /* Slider container */
-    .slides {
+    .slide { flex: 0 0 100vw; width: 100vw; height: 100vh; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 4rem; }
+
+    /* ── FoF Lockup ── */
+    .fof-lockup {
       display: flex;
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-
-    .slide {
-      flex: 0 0 100%;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      position: relative;
-      overflow: hidden;
-      scroll-snap-align: start;
+      gap: 12px;
     }
-
-    /* Transitions */
-    .slides {
-      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    .fof-lockup img {
+      height: 36px;
+      width: auto;
     }
-
-    /* =========== SLIDE 1: Apertura =========== */
-    .slide-1 {
-      background: url('./assets/bg-cordoba.jpg') center / cover;
-      position: relative;
-    }
-
-    .slide-1::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(30, 30, 30, 0.65);
-      z-index: 1;
-    }
-
-    .slide-1 .header {
-      position: absolute;
-      top: 2rem;
-      left: 2rem;
-      z-index: 2;
-    }
-
-    .slide-1 .logo {
-      max-width: 280px;
-      height: auto;
-    }
-
-    .slide-1 .content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 900px;
-      padding: 0 2rem;
-    }
-
-    .slide-1 h1 {
-      font-size: clamp(2.5rem, 8vw, 5.5rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.05em;
-      margin: 0;
-    }
-
-    /* =========== SLIDE 2: El momento =========== */
-    .slide-2 {
-      background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
-      position: relative;
-    }
-
-    .slide-2 .background-line {
-      position: absolute;
-      top: 0;
-      right: -10%;
-      opacity: 0.15;
-      z-index: 0;
-      max-width: 60%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .slide-2 .content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-      padding: 3rem 2rem;
-    }
-
-    .slide-2 p {
-      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-      line-height: 1.4;
-      font-weight: 600;
-      margin: 0;
-    }
-
-    .slide-2 .accent {
-      color: #e4ff97;
-      font-weight: 800;
-    }
-
-    /* =========== SLIDE 3: Lo que te pedimos =========== */
-    .slide-3 {
-      background: #1e1e1e;
-      padding: 3rem 2rem;
-    }
-
-    .slide-3 .content {
-      max-width: 1000px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .slide-3 h2 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 1rem;
-      color: #fff;
-    }
-
-    .slide-3 .request {
-      font-size: clamp(1.25rem, 2.5vw, 1.8rem);
-      line-height: 1.5;
-      font-weight: 500;
-      color: #e2e2e2;
-      margin: 1rem 0;
-    }
-
-    .slide-3 .highlight {
-      color: #4d49fc;
-      font-weight: 800;
-    }
-
-    .slide-3 .highlight.lime {
-      color: #e4ff97;
-    }
-
-    .slide-3 .background-decoration {
-      position: absolute;
-      bottom: -20%;
-      left: -10%;
-      opacity: 0.1;
-      z-index: 0;
-      max-width: 50%;
-      height: auto;
-    }
-
-    /* =========== SLIDE 4: El evento =========== */
-    .slide-4 {
-      background: linear-gradient(135deg, #4d49fc 0%, #1e1e1e 100%);
-      padding: 3rem 2rem;
-    }
-
-    .slide-4 .content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-      text-align: center;
-    }
-
-    .slide-4 h2 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      margin-bottom: 2rem;
-      color: #fff;
-      letter-spacing: -0.03em;
-    }
-
-    .slide-4 .event-detail {
-      font-size: clamp(1.25rem, 2.5vw, 1.8rem);
-      line-height: 2;
-      font-weight: 500;
-      color: #e2e2e2;
-    }
-
-    .slide-4 .date {
-      color: #e4ff97;
-      font-weight: 800;
-      font-size: 1.2em;
-    }
-
-    .slide-4 .badge {
-      display: inline-block;
-      background: rgba(228, 255, 151, 0.1);
-      border: 2px solid #e4ff97;
-      border-radius: 20px;
-      padding: 0.5rem 1rem;
-      color: #e4ff97;
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-top: 2rem;
-    }
-
-    /* =========== SLIDE 5: Confirmación =========== */
-    .slide-5 {
-      background: #1e1e1e;
-      padding: 3rem 2rem;
-      overflow-y: auto;
-    }
-
-    .slide-5 .content {
-      max-width: 600px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    .slide-5 h2 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800;
-      margin-bottom: 2rem;
-      text-align: center;
-      letter-spacing: -0.03em;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #e2e2e2;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1px solid #444;
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      font-family: inherit;
-      font-size: 1rem;
-      border-radius: 8px;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: #4d49fc;
-      background: rgba(77, 73, 252, 0.1);
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .form-submit {
-      width: 100%;
-      padding: 1rem;
+    .chapter-chip {
       background: #4d49fc;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: background 0.2s;
-      margin-top: 1rem;
-    }
-
-    .form-submit:hover {
-      background: #3c39d4;
-    }
-
-    .slide-5 .sponsorship {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid #333;
-      text-align: center;
-      font-size: 0.95rem;
-      color: #999;
-    }
-
-    .slide-5 .sponsorship a {
       color: #e4ff97;
-      text-decoration: none;
       font-weight: 700;
+      font-size: 1.05rem;
+      padding: 6px 18px;
+      border-radius: 12px;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
     }
 
-    .slide-5 .sponsorship a:hover {
-      text-decoration: underline;
-    }
-
-    /* =========== Navigation =========== */
-    .nav-buttons {
+    /* ── Navigation ── */
+    .nav {
       position: fixed;
       bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
+      right: 2rem;
       display: flex;
-      gap: 1rem;
+      align-items: center;
+      gap: 0.75rem;
       z-index: 100;
     }
-
+    .counter {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.05em;
+    }
     .nav-btn {
-      width: 48px;
-      height: 48px;
-      border: 2px solid #e4ff97;
-      background: rgba(228, 255, 151, 0.1);
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid rgba(228,255,151,0.4);
+      background: transparent;
       color: #e4ff97;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 1.5rem;
+      font-size: 1.1rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
-      font-weight: bold;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .nav-btn:hover { border-color: #e4ff97; background: rgba(228,255,151,0.1); }
+
+    /* ══════════════════════════════════════
+       SLIDE 1 — Apertura
+    ══════════════════════════════════════ */
+    .s1 { padding: 0; }
+
+    .s1-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 55%, rgba(77,73,252,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 10% 80%, rgba(249,220,31,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 10%, rgba(255,118,118,0.1) 0%, transparent 55%),
+        linear-gradient(160deg, #0d0d18 0%, #141420 45%, #1e1e1e 100%);
     }
 
-    .nav-btn:hover {
-      background: rgba(228, 255, 151, 0.2);
-      transform: scale(1.1);
+    .s1-line-right {
+      position: absolute;
+      right: -3%;
+      top: -5%;
+      height: 118%;
+      width: auto;
+      z-index: 1;
+      opacity: 0.92;
+      pointer-events: none;
     }
 
-    .nav-btn:active {
-      transform: scale(0.95);
+    .s1-body {
+      position: relative;
+      z-index: 2;
+      padding: 4rem;
+      max-width: 780px;
+    }
+    .s1-body .lockup-wrap { margin-bottom: 3.5rem; }
+
+    .s1-body h1 {
+      font-size: clamp(2.6rem, 6.5vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: #fff;
+    }
+    .s1-body h1 span {
+      color: #e4ff97;
     }
 
-    .slide-counter {
-      position: fixed;
-      top: 2rem;
-      right: 2rem;
+    /* ══════════════════════════════════════
+       SLIDE 2 — El momento
+    ══════════════════════════════════════ */
+    .s2 { background: #1e1e1e; }
+
+    .s2-line {
+      position: absolute;
+      left: -6%;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 130%;
+      width: auto;
+      opacity: 0.8;
+      z-index: 0;
+    }
+
+    .s2-body {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      padding-left: 260px;
+    }
+
+    .s2-body p {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 600;
+      line-height: 1.45;
+      letter-spacing: -0.02em;
+      color: #e2e2e2;
+    }
+    .s2-body .key { color: #fff; font-weight: 800; }
+    .s2-body .lime { color: #e4ff97; }
+
+    /* ══════════════════════════════════════
+       SLIDE FoF — Qué es FoF
+    ══════════════════════════════════════ */
+    .s-fof {
+      background: #1e1e1e;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2.5rem;
+    }
+
+    .s-fof-line {
+      position: absolute;
+      right: -3%;
+      top: -5%;
+      height: 118%;
+      width: auto;
+      z-index: 0;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .s-fof-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(228,255,151,0.6);
+      position: relative;
+      z-index: 1;
+    }
+
+    .s-fof h2 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      max-width: 720px;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+
+    .s-fof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .s-fof-col h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #4d49fc;
+      margin-bottom: 0.85rem;
+    }
+
+    .s-fof-col p {
+      font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+      font-weight: 500;
+      line-height: 1.65;
+      color: #b0b0b0;
+    }
+
+    .s-fof-col p strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .s-fof-desc {
+      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+      font-weight: 500;
+      line-height: 1.65;
+      color: #b0b0b0;
+      max-width: 640px;
+      position: relative;
+      z-index: 1;
+    }
+    .s-fof-desc strong { color: #fff; font-weight: 700; }
+
+    .s-fof-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .s-fof-badge {
+      display: inline-block;
+      background: rgba(228,255,151,0.1);
+      border: 1.5px solid rgba(228,255,151,0.35);
+      color: #e4ff97;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+
+    .s-fof-link {
       font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1.5px solid rgba(255,255,255,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .s-fof-link:hover { color: #e4ff97; border-color: #e4ff97; }
+
+    /* ══════════════════════════════════════
+       SLIDE 3 — Lo que te pedimos
+    ══════════════════════════════════════ */
+    .s3 { background: #1e1e1e; flex-direction: column; justify-content: center; align-items: flex-start; gap: 2rem; }
+
+    .s3-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #4d49fc;
+    }
+
+    .s3 h2 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      max-width: 760px;
+      color: #fff;
+    }
+
+    .s3-points {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 680px;
+    }
+    .s3-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .s3-point .dot {
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4d49fc;
+      margin-top: 0.6rem;
+    }
+    .s3-point p {
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      font-weight: 500;
+      line-height: 1.5;
+      color: #c8c8c8;
+    }
+    .s3-point p strong { color: #fff; font-weight: 700; }
+
+    .s3-line {
+      position: absolute;
+      right: -5%;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 130%;
+      width: auto;
+      opacity: 0.55;
+      z-index: 0;
+    }
+
+    /* ══════════════════════════════════════
+       SLIDE 4 — El evento
+    ══════════════════════════════════════ */
+    .s4 {
+      background: #4d49fc;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .s4-line {
+      position: absolute;
+      right: -10%;
+      bottom: -10%;
+      height: 110%;
+      width: auto;
+      opacity: 0.45;
+      z-index: 0;
+    }
+
+    .s4-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(228,255,151,0.7);
+      position: relative;
+      z-index: 1;
+    }
+
+    .s4 h2 {
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+
+    .s4-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+    .s4-details .row {
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.4;
+    }
+    .s4-details .row strong { color: #fff; font-weight: 700; }
+
+    .s4-pill {
+      display: inline-block;
+      border: 2px solid #e4ff97;
       color: #e4ff97;
       font-weight: 700;
-      z-index: 100;
+      font-size: 0.9rem;
+      padding: 6px 18px;
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+      position: relative;
+      z-index: 1;
     }
 
-    /* =========== Responsive =========== */
-    @media (max-width: 768px) {
-      .slide-1 .header {
-        top: 1.5rem;
-        left: 1.5rem;
-      }
-
-      .slide-1 .logo {
-        max-width: 200px;
-      }
-
-      .nav-buttons {
-        bottom: 1.5rem;
-      }
-
-      .slide-counter {
-        top: 1.5rem;
-        right: 1.5rem;
-        font-size: 0.85rem;
-      }
+    /* ══════════════════════════════════════
+       SLIDE 5 — Confirmación
+    ══════════════════════════════════════ */
+    .s5 {
+      background: #1e1e1e;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      gap: 2.5rem;
     }
+
+    .s5-line {
+      position: absolute;
+      left: -10%;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 130%;
+      width: auto;
+      opacity: 0.35;
+      z-index: 0;
+    }
+
+    .s5-body {
+      position: relative;
+      z-index: 1;
+      max-width: 540px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .s5 h2 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+    }
+
+    .s5 p {
+      font-size: 1.1rem;
+      color: #999;
+      line-height: 1.6;
+    }
+
+    .s5-cta {
+      display: inline-block;
+      background: #e4ff97;
+      color: #1e1e1e;
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .s5-cta:hover { opacity: 0.88; transform: scale(1.02); }
+
+    .s5-organizers {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.95rem;
+      color: #e2e2e2;
+      font-weight: 500;
+    }
+    .s5-org-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    .s5-sponsor {
+      font-size: 0.85rem;
+      color: #555;
+      border-top: 1px solid #2e2e2e;
+      padding-top: 1.25rem;
+      width: 100%;
+    }
+    .s5-sponsor a { color: #777; text-decoration: underline; }
+    .s5-sponsor a:hover { color: #e4ff97; }
   </style>
 </head>
 <body>
-  <div class="slides">
-    <!-- Slide 1: Apertura -->
-    <div class="slide slide-1">
-      <div class="header">
-        <img src="./assets/logo-lockup.png" alt="Friends of Figma Córdoba" class="logo" />
+
+<div class="deck">
+
+  <!-- ── Slide 1: Apertura ── -->
+  <div class="slide s1">
+    <div class="s1-bg"></div>
+
+    <img src="./assets/lines-right.svg" class="s1-line-right" alt="" />
+
+    <div class="s1-body">
+      <div class="lockup-wrap">
+        <div class="fof-lockup">
+          <img src="./assets/logo-lockup.svg" alt="Friends of Figma" />
+          <div class="chapter-chip">Córdoba</div>
+        </div>
       </div>
-      <div class="content">
-        <h1>¿Qué le decís a alguien que está en la incertidumbre?</h1>
-      </div>
+
+      <h1>¿Qué le decís a alguien que no entiende cómo encaja su rol <span>en tiempos de IA?</span></h1>
     </div>
+  </div>
 
-    <!-- Slide 2: El momento -->
-    <div class="slide slide-2">
-      <img src="./assets/lines-right.png" alt="" class="background-line" />
-      <div class="content">
-        <p>
-          La IA está interrumpiendo cómo trabajamos en diseño y producto.
-          <br />
-          <span class="accent">Hay personas buscando orientación real,</span> no ruido.
-          <br />
-          Las voces que importan son las de quienes ya lo están navegando.
-        </p>
-      </div>
+  <!-- ── Slide 2: El momento ── -->
+  <div class="slide s2">
+    <img src="./assets/lines-left.svg" class="s2-line" alt="" />
+
+    <div class="s2-body">
+      <p>
+        La IA está interrumpiendo cómo trabajamos en diseño y producto.<br /><br />
+        Hay <span class="key">mucho ruido</span> y pocas voces que orienten<br />
+        desde la experiencia real.<br /><br />
+        Las que importan son las de <span class="lime">quienes ya lo están viviendo.</span>
+      </p>
     </div>
+  </div>
 
-    <!-- Slide 3: Lo que te pedimos -->
-    <div class="slide slide-3">
-      <img src="./assets/lines-left.png" alt="" class="background-decoration" />
-      <div class="content">
-        <h2>Lo que te pedimos</h2>
+  <!-- ── Slide 3: Lo que te pedimos ── -->
+  <div class="slide s3">
+    <img src="./assets/lines-right.svg" class="s3-line" alt="" />
 
-        <div class="request">
-          Ser parte del panel del <span class="highlight">primer evento de Friends of Figma Córdoba.</span>
-        </div>
+    <div class="s3-label">Lo que te pedimos</div>
 
-        <div class="request">
-          No es una presentación. Es una <span class="highlight lime">conversación entre pares</span> sobre preguntas concretas que recibirás con anticipación.
-        </div>
+    <h2>Ser parte del primer<br />panel de FoF Córdoba.</h2>
 
-        <div class="request">
-          Tu presencia en este espacio importa — <span class="highlight lime">primera vez en la ciudad</span> que alguien como vos habla de esto presencialmente.
-        </div>
+    <div class="s3-points">
+      <div class="s3-point">
+        <div class="dot"></div>
+        <p><strong>No es una presentación.</strong> Es una conversación entre pares sobre preguntas concretas que recibirás con anticipación.</p>
       </div>
-    </div>
-
-    <!-- Slide 4: El evento -->
-    <div class="slide slide-4">
-      <div class="content">
-        <h2>Friends of Figma Córdoba</h2>
-        <div class="event-detail">
-          <strong>Panel de conversación</strong>
-          <br />
-          UX designers, product managers, líderes tech y de negocio
-          <br />
-          <span class="date">2025 · Córdoba</span>
-          <br />
-          Audiencia de nicho: diseñadores, PMs, tech leads locales
-        </div>
-        <div class="badge">Primer evento del chapter</div>
+      <div class="s3-point">
+        <div class="dot"></div>
+        <p><strong>Tu experiencia es el contenido.</strong> No hace falta preparar slides, solo compartir cómo lo estás navegando vos.</p>
       </div>
-    </div>
-
-    <!-- Slide 5: Confirmación -->
-    <div class="slide slide-5">
-      <div class="content">
-        <h2>Confirmá tu participación</h2>
-
-        <a href="GOOGLE_FORM_URL_PLACEHOLDER" target="_blank" class="form-submit" style="display: inline-block; text-decoration: none; text-align: center;">
-          Abrir formulario
-        </a>
-
-        <div class="sponsorship">
-          ¿Tu empresa quiere apoyar este evento?<br />
-          <a href="mailto:davidmotoa493@gmail.com?subject=Sponsor%20FoF%20C%C3%B3rdoba">Contáctanos</a>
-        </div>
+      <div class="s3-point">
+        <div class="dot"></div>
+        <p><strong>Primera vez en la ciudad.</strong> Las personas de la industria local necesitan escuchar esto de alguien como vos, en vivo.</p>
       </div>
     </div>
   </div>
 
-  <!-- Navigation -->
-  <div class="slide-counter"><span id="current">1</span> / 5</div>
-  <div class="nav-buttons">
-    <button class="nav-btn" id="prev-btn" aria-label="Diapositiva anterior">‹</button>
-    <button class="nav-btn" id="next-btn" aria-label="Siguiente diapositiva">›</button>
+  <!-- ── Slide 4: El evento ── -->
+  <div class="slide s4">
+    <img src="./assets/lines-left.svg" class="s4-line" alt="" />
+
+    <div class="s4-label">El evento</div>
+
+    <h2>Friends of Figma<br />Córdoba</h2>
+
+    <div class="s4-details">
+      <div class="row"><strong>Formato:</strong> Panel de conversación — UX, producto, tech y liderazgo</div>
+      <div class="row"><strong>Cuándo:</strong> 2025 · Córdoba, Argentina</div>
+      <div class="row"><strong>Audiencia:</strong> Diseñadores, PMs y tech leads de la escena local</div>
+    </div>
+
+    <div class="s4-pill">Primer evento del chapter</div>
   </div>
 
-  <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-    const slidesContainer = document.querySelector('.slides');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const counterSpan = document.getElementById('current');
+  <!-- ── Slide FoF: Qué es FoF ── -->
+  <div class="slide s-fof">
+    <img src="./assets/lines-right.svg" class="s-fof-line" alt="" />
 
-    function updateSlide() {
-      const offset = -currentSlide * 100;
-      slidesContainer.style.transform = `translateX(${offset}%)`;
-      counterSpan.textContent = currentSlide + 1;
-    }
+    <div class="s-fof-label">Sobre Friends of Figma</div>
 
-    function nextSlide() {
-      if (currentSlide < totalSlides - 1) {
-        currentSlide++;
-        updateSlide();
-      }
-    }
+    <h2>Una comunidad global<br />organizada localmente.</h2>
 
-    function prevSlide() {
-      if (currentSlide > 0) {
-        currentSlide--;
-        updateSlide();
-      }
-    }
+    <p class="s-fof-desc">
+      <strong>Friends of Figma</strong> es la comunidad oficial de Figma,
+      con chapters voluntarios en más de 100 ciudades del mundo.
+      Cada chapter organiza eventos, meetups y conversaciones para
+      diseñadores, PMs y personas de la industria tech.
+    </p>
 
-    // Event listeners
-    nextBtn.addEventListener('click', nextSlide);
-    prevBtn.addEventListener('click', prevSlide);
+    <div class="s-fof-actions">
+      <div class="s-fof-badge">Sin ánimo de lucro</div>
+      <a href="https://friends.figma.com" target="_blank" class="s-fof-link">Sitio oficial →</a>
+    </div>
+  </div>
 
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
-    });
+  <!-- ── Slide 6: Confirmación ── -->
+  <div class="slide s5">
+    <img src="./assets/lines-left.svg" class="s5-line" alt="" />
 
-    // Update counter on load
-    updateSlide();
-  </script>
+    <div class="s5-body">
+      <div class="fof-lockup">
+        <img src="./assets/logo-lockup.svg" alt="Friends of Figma" style="height:28px;" />
+        <div class="chapter-chip">Córdoba</div>
+      </div>
+
+      <h2>¿Querés ser<br />parte?</h2>
+
+      <p>Completá el formulario y te contactamos con los detalles del panel y las preguntas guía.</p>
+
+      <a href="GOOGLE_FORM_URL_PLACEHOLDER" target="_blank" class="s5-cta">
+        Confirmar participación
+      </a>
+
+      <div class="s5-organizers">
+        <span class="s5-org-label">Organizadores</span>
+        <span>Eli Trozzi · Heber Vijarra · David Motoa</span>
+      </div>
+
+      <div class="s5-sponsor">
+        ¿Tu empresa quiere apoyar el evento?
+        <a href="mailto:davidmotoa493@gmail.com?subject=Sponsor%20FoF%20C%C3%B3rdoba"> Contáctanos</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <span class="counter"><span id="cur">1</span>&thinsp;/&thinsp;6</span>
+  <button class="nav-btn" id="prev">‹</button>
+  <button class="nav-btn" id="next">›</button>
+</div>
+
+<script>
+  let cur = 0;
+  const total = 6;
+  const deck = document.querySelector('.deck');
+  const curEl = document.getElementById('cur');
+
+  function go(n) {
+    cur = Math.max(0, Math.min(total - 1, n));
+    deck.style.transform = `translateX(${-cur * 100}vw)`;
+    curEl.textContent = cur + 1;
+  }
+
+  document.getElementById('next').onclick = () => go(cur + 1);
+  document.getElementById('prev').onclick = () => go(cur - 1);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') go(cur + 1);
+    if (e.key === 'ArrowLeft') go(cur - 1);
+  });
+</script>
 </body>
 </html>
