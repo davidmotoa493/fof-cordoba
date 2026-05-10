@@ -1,0 +1,13 @@
+<svg viewBox="0 0 340 1000" fill="none" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+  <path d="M 60,0 C 280,60 -40,190 170,340 C 360,475 -20,580 190,730 C 330,830 70,920 230,1000"
+        stroke="url(#gl)" stroke-width="52" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <defs>
+    <linearGradient id="gl" x1="60" y1="0" x2="230" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0"   stop-color="#F9DC1F"/>
+      <stop offset="0.3" stop-color="#4D49FC"/>
+      <stop offset="0.55" stop-color="#24CB71"/>
+      <stop offset="0.78" stop-color="#CB9FD2"/>
+      <stop offset="1"   stop-color="#FF7676"/>
+    </linearGradient>
+  </defs>
+</svg>
