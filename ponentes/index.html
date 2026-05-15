@@ -176,6 +176,67 @@
     .s5-sponsor { font-size: 0.85rem; color: #555; border-top: 1px solid #2e2e2e; padding-top: 1.25rem; width: 100%; }
     .s5-sponsor a { color: #777; text-decoration: underline; }
     .s5-sponsor a:hover { color: #e4ff97; }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE — Tablet (≤ 1024px)
+    ══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .slide { padding: 2.5rem; }
+      .s1-body { padding: 2.5rem; }
+      .s2-body { padding-left: 130px; max-width: 100%; }
+      .s4-logomark { height: 72%; opacity: 0.38; }
+      .s4-desc { max-width: 100%; }
+      .s-fof h2, .s-fof-desc { max-width: 100%; }
+      .s3 h2, .s3-points { max-width: 100%; }
+      .s5-body { max-width: 90%; }
+    }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE — Mobile (≤ 640px)
+    ══════════════════════════════════════ */
+    @media (max-width: 640px) {
+      .slide { padding: 1.5rem; }
+
+      /* Lockup */
+      .fof-lockup img { height: 28px; }
+      .chapter-chip { font-size: 0.9rem; padding: 5px 14px; }
+
+      /* Slide 1 */
+      .s1-body { padding: 1.5rem; max-width: 100%; }
+      .s1-body .lockup-wrap { margin-bottom: 2rem; }
+      .s1-cordoba { height: 28%; }
+
+      /* Slide 2 */
+      .s2-body { padding-left: 0; max-width: 100%; }
+
+      /* Slide 3 */
+      .s3 { gap: 1.25rem; }
+      .s3 h2 { max-width: 100%; }
+      .s3-points { max-width: 100%; gap: 1rem; }
+
+      /* Slide 4 */
+      .s4 { gap: 1.25rem; }
+      .s4-logomark { display: none; }
+      .s4-desc { max-width: 100%; font-size: 0.88rem; }
+      .s4-details { gap: 0.5rem; }
+      .s4-details .row { font-size: clamp(0.9rem, 3.5vw, 1.15rem); }
+
+      /* Slide FoF */
+      .s-fof { gap: 1.5rem; }
+      .s-fof h2 { max-width: 100%; }
+      .s-fof-desc { max-width: 100%; font-size: 1rem; }
+      .s-fof-actions { flex-wrap: wrap; gap: 0.75rem; }
+
+      /* Slide 5 */
+      .s5-body { max-width: 100%; }
+      .s5 p { font-size: 1rem; }
+      .s5-cta { font-size: 1rem; padding: 0.85rem 2rem; width: 100%; text-align: center; }
+      .s5-sponsor { font-size: 0.8rem; }
+
+      /* Navegación — targets más grandes para touch */
+      .nav { bottom: 1.25rem; right: 1.25rem; }
+      .nav-btn { width: 48px; height: 48px; font-size: 1.3rem; }
+    }
   </style>
 </head>
 <body>
@@ -443,6 +504,13 @@
     if (e.key === 'ArrowRight') go(cur + 1);
     if (e.key === 'ArrowLeft') go(cur - 1);
   });
+
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) go(cur + (diff > 0 ? 1 : -1));
+  }, { passive: true });
 </script>
 </body>
 </html>
